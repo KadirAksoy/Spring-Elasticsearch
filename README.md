@@ -2,7 +2,7 @@
 Basic elasticsearch project with spring boot
 
 
-![elasticsearch_springboot](https://github.com/KadirAksoy/Spring-Elasticsearch/assets/90133005/386b5198-6fdd-4798-8df2-1900387ae922)
+![elasticsearch_springboot](https://github.com/KadirAksoy/Spring-Elasticsearch/png/elasticsearch_springboot.png)
 
 📖 Information
 <br>-We can search full-text in a huge data stack via Elastic Search.
