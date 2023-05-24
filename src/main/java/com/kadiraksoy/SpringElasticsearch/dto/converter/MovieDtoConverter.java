@@ -4,6 +4,8 @@ import com.kadiraksoy.SpringElasticsearch.dto.MovieDto;
 import com.kadiraksoy.SpringElasticsearch.model.Movie;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 
 @Component
 public class MovieDtoConverter {
