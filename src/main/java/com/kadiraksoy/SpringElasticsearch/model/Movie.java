@@ -1,11 +1,20 @@
 package com.kadiraksoy.SpringElasticsearch.model;
 
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(indexName = "movie")
 public class Movie implements Serializable {
 
     @Id
