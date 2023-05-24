@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor
 public class Director implements Serializable {
 
     @NonNull
