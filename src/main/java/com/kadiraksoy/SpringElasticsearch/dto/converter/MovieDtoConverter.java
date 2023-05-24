@@ -18,4 +18,12 @@ public class MovieDtoConverter {
                 movie.getRating(),
                 movie.getDirector());
     }
+    public Movie dtoConvert(MovieDto movieDto){
+        return new Movie(
+                movieDto.getId(),
+                movieDto.getName(),
+                movieDto.getGenre(),
+                movieDto.getRating(),
+                movieDto.getDirector());
+    }
 }

@@ -1,18 +1,17 @@
 package com.kadiraksoy.SpringElasticsearch.service;
 
-
-
-
 import com.kadiraksoy.SpringElasticsearch.dto.MovieDto;
 import com.kadiraksoy.SpringElasticsearch.dto.converter.MovieDtoConverter;
 import com.kadiraksoy.SpringElasticsearch.model.Movie;
 import com.kadiraksoy.SpringElasticsearch.repository.MovieRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+
+
 
 @Service
 public class MovieService {
@@ -50,17 +49,18 @@ public class MovieService {
         return movieDtoList;
    }
 
-    public void update(String id,Movie movie) {
-        movieRepository.findById(id).ifPresentOrElse(movies -> {
-                    movie.setName(movie.getName());
-                    movie.setRating(movie.getRating());
-                    movie.setGenre(movie.getGenre());
-                    movie.setDirector(movie.getDirector());
-                    movieRepository.save(movie);
-                }, () -> {
-                    throw new RuntimeException("No Record With this Id!");
-                }
-        );
+    public MovieDto update(String id, MovieDto movieDto) {
+        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        optionalMovie.ifPresent(movie -> {
+            movie.setId(movieDto.getId());
+            movie.setGenre(movieDto.getGenre());
+            movie.setName(movieDto.getName());
+            movie.setRating(movieDto.getRating());
+            movie.setDirector(movieDto.getDirector());
+            movieRepository.save(movie);
+        });
+        return optionalMovie.map(movieDtoConverter::convert).orElse(new MovieDto());
+
     }
 
     public void deleteMovie(String id) {
@@ -71,13 +71,13 @@ public class MovieService {
         }
     }
 
-    public MovieDto saveMovie(Movie movie){
+    public MovieDto saveMovie(MovieDto movieDto){
         Movie tmpMovie = new Movie();
-        tmpMovie.setId(movie.getId());
-        tmpMovie.setName(movie.getName());
-        tmpMovie.setDirector(movie.getDirector());
-        tmpMovie.setRating(movie.getRating());
-        tmpMovie.setGenre(movie.getGenre());
+        tmpMovie.setId(movieDto.getId());
+        tmpMovie.setName(movieDto.getName());
+        tmpMovie.setDirector(movieDto.getDirector());
+        tmpMovie.setRating(movieDto.getRating());
+        tmpMovie.setGenre(movieDto.getGenre());
 
         movieRepository.save(tmpMovie);
         return movieDtoConverter.convert(tmpMovie);
@@ -93,7 +93,13 @@ public class MovieService {
         return movieDtoList;
     }
 
-//    public Page<MovieDto> searchMovieName(String search){
-//
-//    }
+    public Page<MovieDto> searchMovieName(String search) {
+
+        Page<Movie> movies = movieRepository.findByMovieName(search);
+        Page<MovieDto> movieDto = movies.map(movieDtoConverter::convert);
+        return movieDto;
+    }
+
+
+
 }
