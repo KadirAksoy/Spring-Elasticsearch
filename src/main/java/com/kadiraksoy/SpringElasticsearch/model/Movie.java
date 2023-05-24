@@ -10,9 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "movie")

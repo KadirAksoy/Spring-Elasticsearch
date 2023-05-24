@@ -5,9 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 @RequiredArgsConstructor
 public class Director implements Serializable {
 
