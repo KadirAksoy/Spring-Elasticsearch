@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
 public class Genre implements Serializable {
